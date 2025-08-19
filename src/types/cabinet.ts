@@ -1,18 +1,18 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const BayConfigSchema = z.object({
   hasDoor: z.boolean(),
   shelfCount: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
 });
 
-const WoodFinishSchema = z.enum(["maple", "cherry", "oak", "american-walnut"]);
+const WoodFinishSchema = z.enum(['maple', 'cherry', 'oak', 'american-walnut']);
 const PaintFinishSchema = z.enum([
-  "blue-RAL5024",
-  "turquoise-RAL6034",
-  "red-RAL3014",
-  "white-RAL9003",
-  "green-RAL6019",
-  "grey-RAL7016",
+  'blue-RAL5024',
+  'turquoise-RAL6034',
+  'red-RAL3014',
+  'white-RAL9003',
+  'green-RAL6019',
+  'grey-RAL7016',
 ]);
 
 const MaterialSchema = z.union([WoodFinishSchema, PaintFinishSchema]);
