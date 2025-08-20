@@ -1,18 +1,18 @@
-import type { CabinetConfig, ComponentBOM } from "@/types";
-import { WoodFinishSchema } from "@/types";
+import type { CabinetConfig, ComponentBOM } from '@/types';
+import { WoodFinishSchema } from '@/types';
 
 export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
   const components: ComponentBOM[] = [];
 
   const sideboard = {
     fixed: [
-      "top-panel",
-      "bottom-panel",
-      "back-panel",
-      "left-side-panel",
-      "right-side-panel",
+      'top-panel',
+      'bottom-panel',
+      'back-panel',
+      'left-side-panel',
+      'right-side-panel',
     ],
-    variable: ["door", "shelf", "divider-panel"],
+    variable: ['door', 'shelf', 'divider-panel'],
   } as const;
 
   const panelThickness = {
@@ -28,27 +28,27 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
   };
 
   const panelSpecs = {
-    "top-panel": {
+    'top-panel': {
       length: config.dimensions.widthX - 2 * panelThickness.carcasePanel,
       width: config.dimensions.widthZ,
       thickness: panelThickness.carcasePanel,
     },
-    "bottom-panel": {
+    'bottom-panel': {
       length: config.dimensions.widthX - 2 * panelThickness.carcasePanel,
       width: config.dimensions.widthZ,
       thickness: panelThickness.carcasePanel,
     },
-    "left-side-panel": {
+    'left-side-panel': {
       length: config.dimensions.widthY,
       width: config.dimensions.widthZ,
       thickness: panelThickness.carcasePanel,
     },
-    "right-side-panel": {
+    'right-side-panel': {
       length: config.dimensions.widthY,
       width: config.dimensions.widthZ,
       thickness: panelThickness.carcasePanel,
     },
-    "back-panel": {
+    'back-panel': {
       length:
         config.dimensions.widthX -
         (panelThickness.carcasePanel - panelThickness.backPanelGrooveDepth) * 2,
@@ -59,8 +59,8 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
     },
   } as const;
 
-  function getMaterialType(finish: string): "natural-wood" | "mdf" {
-    return WoodFinishSchema.safeParse(finish).success ? "natural-wood" : "mdf";
+  function getMaterialType(finish: string): 'natural-wood' | 'mdf' {
+    return WoodFinishSchema.safeParse(finish).success ? 'natural-wood' : 'mdf';
   }
 
   function calculatePrice(
@@ -68,22 +68,21 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
     finish: string
   ): number {
     const materialType = getMaterialType(finish);
-    if (materialType === "mdf") {
+    if (materialType === 'mdf') {
       const surface = (dimensions.length * dimensions.width) / 1000000;
       const mdfPrice = 120;
       return surface * mdfPrice;
-    } else {
-      const volume =
-        (dimensions.length * dimensions.width * dimensions.thickness) /
-        1000000000;
-      const woodPrices = {
-        maple: 600,
-        cherry: 800,
-        oak: 700,
-        "american-walnut": 1200,
-      } as const;
-      return volume * (woodPrices[finish as keyof typeof woodPrices] || 700);
     }
+    const volume =
+      (dimensions.length * dimensions.width * dimensions.thickness) /
+      1000000000;
+    const woodPrices = {
+      maple: 600,
+      cherry: 800,
+      oak: 700,
+      'american-walnut': 1200,
+    } as const;
+    return volume * (woodPrices[finish as keyof typeof woodPrices] || 700);
   }
 
   const fixedComponents = sideboard.fixed.map((panel) => {
@@ -92,7 +91,7 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
 
     return {
       id: `${panel}-001`,
-      type: "component" as const,
+      type: 'component' as const,
       name: panel,
       ...panelSpecs[panel],
       quantity: 1,
@@ -106,10 +105,10 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
   let doorCount = 0;
   let totalShelfCount = 0;
 
-  config.bays.configs.forEach((bay) => {
+  for (const bay of config.bays.configs) {
     if (bay.hasDoor) doorCount++;
     totalShelfCount += bay.shelfCount;
-  });
+  }
 
   const dividerCount = config.bays.count - 1;
 
@@ -134,9 +133,9 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
     );
 
     variableComponents.push({
-      id: "door-001",
-      type: "component" as const,
-      name: "door",
+      id: 'door-001',
+      type: 'component' as const,
+      name: 'door',
       length: doorWidth,
       width:
         config.dimensions.widthY -
@@ -175,9 +174,9 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
     );
 
     variableComponents.push({
-      id: "shelf-001",
-      type: "component" as const,
-      name: "shelf",
+      id: 'shelf-001',
+      type: 'component' as const,
+      name: 'shelf',
       length: shelfWidth,
       width: shelfDepth,
       thickness: panelThickness.interiorPanel,
@@ -208,9 +207,9 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
       config.finishes.carcase
     );
     variableComponents.push({
-      id: "divider-001",
-      type: "component" as const,
-      name: "divider-panel",
+      id: 'divider-001',
+      type: 'component' as const,
+      name: 'divider-panel',
       length: dividerHeight,
       width: dividerDepth,
       thickness: panelThickness.interiorPanel,
