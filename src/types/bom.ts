@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {FinishesSchema} from "./cabinet"
+import { FinishSchema } from "./cabinet";
 
 const ComponentBOMSchema = z.object({
   id: z.string(),
@@ -19,7 +19,7 @@ const ComponentBOMSchema = z.object({
   thickness: z.number().positive(),
   quantity: z.number().int().positive(),
   material: z.enum(["natural-wood", "mdf"]),
-  finish: FinishesSchema,
+  finish: FinishSchema,
   pricePerUnit: z.number().nonnegative(),
   totalCost: z.number().nonnegative(),
 });
