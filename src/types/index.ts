@@ -1,4 +1,13 @@
-// Placeholder file - will be replaced with actual type exports
-// This file ensures Git tracks the types folder structure
+export type { BayConfig, CabinetConfig } from './cabinet';
+export type { PBRMaterial } from './materials';
+export type { ComponentBOM, HardwareBOM, BOM } from './bom';
 
-export type {};
+export {
+  BayConfigSchema,
+  CabinetConfigSchema,
+  FinishSchema,
+  WoodFinishSchema,
+  PaintFinishSchema,
+} from './cabinet';
+export { PBRMaterialSchema } from './materials';
+export { ComponentBOMSchema, HardwareBOMSchema, BOMSchema } from './bom';
