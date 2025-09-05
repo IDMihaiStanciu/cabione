@@ -30,22 +30,22 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
   const panelSpecs = {
     'top-panel': {
       length: config.dimensions.widthX - 2 * panelThickness.carcasePanel,
-      width: config.dimensions.widthZ,
+      width: config.dimensions.depthZ,
       thickness: panelThickness.carcasePanel,
     },
     'bottom-panel': {
       length: config.dimensions.widthX - 2 * panelThickness.carcasePanel,
-      width: config.dimensions.widthZ,
+      width: config.dimensions.depthZ,
       thickness: panelThickness.carcasePanel,
     },
     'left-side-panel': {
-      length: config.dimensions.widthY,
-      width: config.dimensions.widthZ,
+      length: config.dimensions.heightY,
+      width: config.dimensions.depthZ,
       thickness: panelThickness.carcasePanel,
     },
     'right-side-panel': {
-      length: config.dimensions.widthY,
-      width: config.dimensions.widthZ,
+      length: config.dimensions.heightY,
+      width: config.dimensions.depthZ,
       thickness: panelThickness.carcasePanel,
     },
     'back-panel': {
@@ -53,7 +53,7 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
         config.dimensions.widthX -
         (panelThickness.carcasePanel - panelThickness.backPanelGrooveDepth) * 2,
       width:
-        config.dimensions.widthY -
+        config.dimensions.heightY -
         (panelThickness.carcasePanel - panelThickness.backPanelGrooveDepth) * 2,
       thickness: panelThickness.backPanel,
     },
@@ -124,7 +124,7 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
       {
         length: doorWidth,
         width:
-          config.dimensions.widthY -
+          config.dimensions.heightY -
           panelThickness.carcasePanel * 2 -
           panelThickness.doorLoftClearence * 2,
         thickness: panelThickness.door,
@@ -138,7 +138,7 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
       name: 'door',
       length: doorWidth,
       width:
-        config.dimensions.widthY -
+        config.dimensions.heightY -
         panelThickness.carcasePanel * 2 -
         panelThickness.doorLoftClearence * 2,
       thickness: panelThickness.door,
@@ -158,7 +158,7 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
         config.bays.count;
     const shelfWidth = bayWidth;
     const shelfDepth =
-      config.dimensions.widthZ -
+      config.dimensions.depthZ -
       panelThickness.backPanelClearence -
       panelThickness.backPanel -
       panelThickness.door -
@@ -190,9 +190,9 @@ export function calculateComponentBOM(config: CabinetConfig): ComponentBOM[] {
 
   if (dividerCount > 0) {
     const dividerHeight =
-      config.dimensions.widthY - panelThickness.carcasePanel * 2;
+      config.dimensions.heightY - panelThickness.carcasePanel * 2;
     const dividerDepth =
-      config.dimensions.widthZ -
+      config.dimensions.depthZ -
       panelThickness.frontClearence -
       panelThickness.doorFrontClearence -
       panelThickness.door -
