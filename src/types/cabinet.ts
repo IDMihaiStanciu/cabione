@@ -20,8 +20,8 @@ const FinishSchema = z.union([WoodFinishSchema, PaintFinishSchema]);
 const CabinetConfigSchema = z.object({
   dimensions: z.object({
     widthX: z.number().min(300).max(2700),
-    widthY: z.number().min(300).max(1600),
-    widthZ: z.number().min(300).max(650),
+    heightY: z.number().min(300).max(1600),
+    depthZ: z.number().min(300).max(650),
   }),
   bays: z.object({
     count: z.union([z.literal(1), z.literal(2), z.literal(3)]),
