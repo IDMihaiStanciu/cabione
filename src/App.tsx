@@ -6,9 +6,9 @@ function App() {
         <p className="text-gray-300 text-lg">3D Furniture Configurator</p>
         <div className="mt-8 p-6 bg-gray-800 rounded-lg">
           <p className="text-green-400 font-medium">
-            ✅ React 19 is running successfully!
+            ✅ React 19 + Zustand State Management Complete!
           </p>
-          <p className="text-blue-400 mt-2">Ready for Three.js integration</p>
+          <p className="text-blue-400 mt-2">Ready for 3D scene integration</p>
         </div>
       </div>
     </div>
